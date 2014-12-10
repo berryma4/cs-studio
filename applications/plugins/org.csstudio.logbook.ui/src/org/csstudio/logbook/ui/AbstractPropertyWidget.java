@@ -11,6 +11,7 @@ import org.csstudio.logbook.LogEntry;
 import org.csstudio.logbook.Property;
 import org.csstudio.logbook.PropertyBuilder;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * An Abstract class which provides the basic functionality expected from a
@@ -44,7 +45,8 @@ public abstract class AbstractPropertyWidget extends Composite {
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-			    updateUI();
+			    Display.getDefault().asyncExec(() -> {updateUI();});
+			    
 			}
 		    });
 	}
