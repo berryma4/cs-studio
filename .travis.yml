@@ -1,0 +1,9 @@
+# whitelist
+branches:
+  only:
+    - travis_test
+langauge: java
+jdk:
+    -oraclejdk8
+script: build/travis.sh
+
