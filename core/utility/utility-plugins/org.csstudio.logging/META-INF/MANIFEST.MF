@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Logging
-Bundle-Description: Configure java.util.logging for CSS
+Bundle-Description: Configure java.util.logging for CS-Studio
 Bundle-SymbolicName: org.csstudio.logging
 Bundle-Version: 3.2.1.qualifier
 Bundle-Vendor: Kay Kasemir <kasemirk@ornl.gov> - SNS
