@@ -8,8 +8,11 @@ langauge: java
 jdk:
   - oraclejdk8
 
+install: echo 'Skipping mvn install'
+
 before_script:
  - chmod +x build/travis.sh
+ - echo "MAVEN_OPTS='-Xmx2g -Xms1g'" > ~/.mavenrc
 
 script:
  - mvn clean verify -fcore/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle
