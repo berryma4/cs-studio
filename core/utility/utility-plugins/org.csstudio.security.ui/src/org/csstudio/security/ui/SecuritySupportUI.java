@@ -24,12 +24,12 @@ import org.eclipse.swt.SWT;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-/** UI support for security.
+/** UI support for security
  *
  *  <p>Actions can register to be enabled/disabled based on authorization.
  *
  *  @see #registerAction(IAction, String)
- *
+ *  
  *  @author Kay Kasemir
  */
 public class SecuritySupportUI implements BundleActivator, SecurityListener

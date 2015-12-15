@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Channel based BOY widgets
+Bundle-Name: Channel Based BOY widgets
 Bundle-SymbolicName: org.csstudio.channel.opiwidgets;singleton:=true
 Bundle-Version: 1.1.2.qualifier
 Bundle-Activator: org.csstudio.channel.opiwidgets.Activator

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: CSS Application Startup
+Bundle-Name: CS-Studio Application Startup
 Bundle-SymbolicName: org.csstudio.startup;singleton:=true
 Bundle-Version: 3.2.1.qualifier
 Bundle-Description: Common CSS Application code

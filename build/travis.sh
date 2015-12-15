@@ -1,10 +1,9 @@
 #!/bin/bash
+set -ev
 
-folderChangeSet=(`git diff-tree --name-status HEAD`)
-for((i=0; i<${#folderChangeSet[@]}; i++))
+folderChangeSet=(`git diff-tree --name-only --no-commit-id -r HEAD | grep '\(core\|applications\)\/[[:alpha:]]' | cut -d/ -f1,2`)
+sorted_unique=(`echo "${folderChangeSet[@]}" | tr ' ' '\n' | sort -u -r | tr '\n' ' '`)
+for project in "${sorted_unique[@]}"
 do
-  if [ ${folderChangeSet[$i]} == "M" ]; then
-    project=${folderChangeSet[$i+1]}
-    echo $project
-  fi
+  echo "${project}/pom.xml"
 done

@@ -2,8 +2,15 @@
 branches:
   only:
     - travis_test
+
 langauge: java
+
 before_script:
  - chmod +x build/travis.sh
-script: build/travis.sh
 
+script:
+ - mvn clean verify -fcore/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle
+ - mvn clean verify -fapplications/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle -Dcsstudio.composite.repo=core/p2repo
+
+after_success:
+ - build/travis.sh | xargs -I {} -n1 mvn clean verify -f{} -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle -Dcsstudio.composite.repo=p2repo -Pupload
