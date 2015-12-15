@@ -15,8 +15,8 @@ before_script:
  - echo "MAVEN_OPTS='-Xmx2g -Xms1g'" > ~/.mavenrc
 
 script:
- - mvn clean verify -fcore/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle
- - mvn clean verify -fapplications/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle -Dcsstudio.composite.repo=core/p2repo
+ - mvn clean verify -fcore/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore
+ - mvn clean verify -fapplications/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=core/p2repo
 
 after_success:
- - build/travis.sh | xargs -I {} -n1 mvn clean verify -f{} -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Pcheckstyle -Dcsstudio.composite.repo=p2repo -Pupload
+ - build/travis.sh | xargs -I {} -n1 mvn clean verify -f{} -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=p2repo -Pupload
