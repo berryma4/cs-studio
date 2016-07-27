@@ -16,12 +16,12 @@ function catTests {
 }
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [ "$TRAVIS_PULL_REQUEST" == "false" -o "$TRAVIS_BRANCH" =~ "[0-9]+\.[0-9]+\.x" -o "$TRAVIS_BRANCH" == "master"]; then
-    echo "Skipping deploy; just doing a build."
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+\.x ]] || [ "$TRAVIS_BRANCH" == "master" ]); then
+    echo "Deploying"
     doCompileWithDeploy
     catTests
-    exit 0
 else
+    echo "Skipping deploy; just doing a build."
     doCompile
     catTests
 fi
@@ -31,4 +31,4 @@ REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
-
+exit 0
