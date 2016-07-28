@@ -17,14 +17,16 @@ function catTests {
 
 REPO=`git config remote.origin.url`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+REPO_ORG_GIT=${REPO/https:\/\/github.com\//}
+REPO_ORG=${REPO_ORG_GIT/\/cs-studio\.git/}
 SHA=`git rev-parse --verify HEAD`
 
 echo $REPO
-echo $SSH_REPO
+echo $REPO_ORG
 echo $SHA
 
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$SSH_REPO" == "ControlSystemStudio/cs-studio" ] ([[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+\.x ]] || [ "$TRAVIS_BRANCH" == "master" ]); then
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$REPO_ORG" == "ControlSystemStudio" ] ([[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+\.x ]] || [ "$TRAVIS_BRANCH" == "master" ]); then
     echo "Deploying"
     doCompileWithDeploy
     catTests
