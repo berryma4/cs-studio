@@ -15,8 +15,16 @@ function catTests {
   find ./ -type d -name "surefire-reports" -print0 | xargs -0 -I {} find {} -iname "*.txt" -type f | xargs cat
 }
 
+REPO=`git config remote.origin.url`
+SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
+SHA=`git rev-parse --verify HEAD`
+
+echo $REPO
+echo $SSH_REPO
+echo $SHA
+
 # Pull requests and commits to other branches shouldn't try to deploy, just build to verify
-if [ "$TRAVIS_PULL_REQUEST" == "false" ] && ([[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+\.x ]] || [ "$TRAVIS_BRANCH" == "master" ]); then
+if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$SSH_REPO" == "ControlSystemStudio/cs-studio" ] ([[ "$TRAVIS_BRANCH" =~ ^[0-9]+\.[0-9]+\.x ]] || [ "$TRAVIS_BRANCH" == "master" ]); then
     echo "Deploying"
     doCompileWithDeploy
     catTests
@@ -25,10 +33,5 @@ else
     doCompile
     catTests
 fi
-
-# Save some useful information
-REPO=`git config remote.origin.url`
-SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
-SHA=`git rev-parse --verify HEAD`
 
 exit 0
