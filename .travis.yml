@@ -21,4 +21,7 @@ before_script:
 
 script:
  - java -version
- - ./build/travis.sh 
+ - ./build/travis.sh
+
+after_failure:
+ - find ./ -type d -name "surefire-reports" -print0 | xargs -0 -I {} find {} -iname "*.txt" -type f | xargs cat
