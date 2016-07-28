@@ -7,8 +7,9 @@ function doCompile {
 }
 
 function doCompileWithDeploy {
-  mvn clean verify -fcore/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -PuploadRepo
-  mvn clean verify -fapplications/pom.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=core/p2repo -PuploadRepo
+  echo "<settings><servers><server><id>ossrh</id><username>\${env.S3USER}</username><password>\${env.S3PASS}</password></server></servers></settings>" > ~/settings.xml
+  mvn clean verify -fcore/pom.xml --settings ~/settings.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -PuploadRepo
+  mvn clean verify -fapplications/pom.xml --settings ~/settings.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=core/p2repo -PuploadRepo
 }
 
 function catTests {
