@@ -7,7 +7,7 @@ function doCompile {
 }
 
 function doCompileWithDeploy {
-  echo "<settings><servers><server><id>ossrh</id><username>\${env.S3USER}</username><password>\${env.S3PASS}</password></server></servers></settings>" > ~/settings.xml
+  echo "<settings><servers><server><id>s3.site</id><username>\${env.S3USER}</username><password>\${env.S3PASS}</password></server></servers></settings>" > ~/settings.xml
   mvn clean verify -fcore/pom.xml --settings ~/settings.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -PuploadRepo
   mvn clean verify -fapplications/pom.xml --settings ~/settings.xml -Declipse.p2.mirrors=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=core/p2repo -PuploadRepo
 }
